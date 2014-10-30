@@ -144,22 +144,18 @@ SofiaTree.prototype.__buildWordsArrayRec=function (p, useCache, matches){
 // * return `matches` the array of words that start with the given prefix
 
 SofiaTree.prototype.getCompletions= function(prefix, recursive){
+	prefix=prefix || "";
 
 	//Tree depth index
-    var depth=0;
-    var node=this;
-
-    if(!prefix || !prefix.length)
-    	return [];
+    var depth, node;
 
     //Find the root node of the subtree which contains all the completions
-    do{
-		if(!node.children || !node.children[prefix[depth]])
-			return [];
+    for(depth=0, node=this; depth < prefix.length; depth++){
+    	if(!node.children || !node.children[prefix[depth]])
+    		return [];
 
-	    node = node.children[prefix[depth]];
-		depth++;
-	} while(depth  < prefix.length)
+    	node = node.children[prefix[depth]];
+    } 
 		
 	return recursive ? node.__buildWordsArrayRec(prefix, this.useCache, []) : 
 					   node.__buildWordsArray(prefix, this.useCache);
@@ -179,18 +175,16 @@ SofiaTree.prototype.getCompletions= function(prefix, recursive){
 SofiaTree.prototype.insert= function(word){
 	word=word.toLowerCase();
 
-    var depth = 0;
+    var depth;
 	var node = this;
-
 
     // This eliminate empty strings
     if(!word || ! word.length)
     	return;
 
 	//Find the last letter of the new word already present in the tree
-    while(depth < word.length && node.children && node.children[word[depth]]){ 
+    for(depth=0; depth < word.length && node.children && node.children[word[depth]]; depth++ ){ 
     	node = node.children[word[depth]]
-    	depth++;
     }
  
     //Append new nodes for each remaining letter, if necessary. This eliminate duplicates

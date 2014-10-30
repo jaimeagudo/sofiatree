@@ -11,6 +11,32 @@
   <div id="container">
     <div id="background"></div>
     
+      <ul id="jump_to">
+        <li>
+          <a class="large" href="javascript:void(0);">Jump To &hellip;</a>
+          <a class="small" href="javascript:void(0);">+</a>
+          <div id="jump_wrapper">
+          <div id="jump_page">
+            
+              
+              <a class="source" href="example.html">
+                example.js
+              </a>
+            
+              
+              <a class="source" href="sofia-tree-min.html">
+                sofia-tree-min.js
+              </a>
+            
+              
+              <a class="source" href="sofia-tree.html">
+                sofia-tree.js
+              </a>
+            
+          </div>
+        </li>
+      </ul>
+    
     <ul class="sections">
         
           <li id="title">
@@ -56,7 +82,7 @@ beloved daughter.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Author: Jaime Agudo <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#111;&#58;&#106;&#97;&#x69;&#109;&#x65;&#46;&#97;&#x67;&#117;&#100;&#111;&#x2e;&#108;&#111;&#x70;&#x65;&#122;&#x40;&#x67;&#x6d;&#x61;&#105;&#108;&#46;&#99;&#x6f;&#109;">&#106;&#97;&#x69;&#109;&#x65;&#46;&#97;&#x67;&#117;&#100;&#111;&#x2e;&#108;&#111;&#x70;&#x65;&#122;&#x40;&#x67;&#x6d;&#x61;&#105;&#108;&#46;&#99;&#x6f;&#109;</a></p>
+              <p>Author: Jaime Agudo <a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#58;&#106;&#x61;&#x69;&#x6d;&#101;&#x2e;&#97;&#x67;&#x75;&#100;&#x6f;&#x2e;&#108;&#111;&#x70;&#101;&#122;&#x40;&#103;&#109;&#x61;&#105;&#108;&#46;&#99;&#111;&#x6d;">&#106;&#x61;&#x69;&#x6d;&#101;&#x2e;&#97;&#x67;&#x75;&#100;&#x6f;&#x2e;&#108;&#111;&#x70;&#101;&#122;&#x40;&#103;&#109;&#x61;&#105;&#108;&#46;&#99;&#111;&#x6d;</a></p>
 <p>Github: <a href="https://github.com/jaimeagudo/sofiatree/">https://github.com/jaimeagudo/sofiatree/</a></p>
 <p>License: MIT</p>
 
@@ -110,6 +136,28 @@ avoid redundancy.</p>
             </div>
             
             <div class="content"><div class='highlight'><pre>
+(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-keyword">var</span> root = <span class="hljs-keyword">this</span>;
+  <span class="hljs-keyword">var</span> previous_SofiaTree = root.SofiaTree;
+
+  <span class="hljs-keyword">if</span>( <span class="hljs-keyword">typeof</span> exports !== <span class="hljs-string">'undefined'</span> ) {
+    <span class="hljs-keyword">if</span>( <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">module</span> !== <span class="hljs-string">'undefined'</span> &amp;&amp; <span class="hljs-built_in">module</span>.exports ) {
+      exports = <span class="hljs-built_in">module</span>.exports = SofiaTree;
+    }
+    exports.SofiaTree = SofiaTree;
+  } 
+  <span class="hljs-keyword">else</span> {
+    root.SofiaTree = SofiaTree;
+  }
+
+
+  SofiaTree.noConflict = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">()</span> </span>{
+  	root.SofiaTree = previous_SofiaTree;
+  	<span class="hljs-keyword">return</span> SofiaTree;
+  }
+
+
+
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">SofiaTree</span> <span class="hljs-params">(options)</span> </span>{
 	options = options || {};
 
@@ -543,7 +591,9 @@ it won’t duplicate words</p>
 	<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
 }
 
-<span class="hljs-built_in">module</span>.exports = SofiaTree;</pre></div></div>
+
+
+}).call(<span class="hljs-keyword">this</span>);</pre></div></div>
             
         </li>
         
