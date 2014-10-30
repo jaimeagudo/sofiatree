@@ -1,0 +1,25 @@
+{
+  "name": "sofia-tree",
+  "version": "0.0.1",
+  "description": "A kind of Radix Tree data structure baptized 'Sofia Tree' in honour to my beloved daughter. A multinode tree with a level for each letter with fast lookup operations.",
+  "author": "Jaime Agudo <jaime.agudo.lopez@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "main": "sofia-tree.js",
+  "devDependencies": {
+    "underscore": "~1.7.0",
+    "body-parser": "~1.9.1",
+    "express": "~4.9.8",
+    "supervisor": "~0.6.0",
+    "webkit-devtools-agent": "~0.3.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jaimeagudo/sofiatree.git"
+  },
+  "scripts": {
+    "test": "node example.js"
+  },
+  "analyze": true
+}
