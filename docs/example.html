@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <title>example.js</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, target-densitydpi=160dpi, initial-scale=1.0; maximum-scale=1.0; user-scalable=0;">
+  <link rel="stylesheet" media="all" href="docco.css" />
+</head>
+<body>
+  <div id="container">
+    <div id="background"></div>
+    
+    <ul class="sections">
+        
+          <li id="title">
+              <div class="annotation">
+                  <h1>example.js</h1>
+              </div>
+          </li>
+        
+        
+        
+        <li id="section-1">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-1">&#182;</a>
+              </div>
+              
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> express = <span class="hljs-built_in">require</span>(<span class="hljs-string">'express'</span>);
+<span class="hljs-keyword">var</span> bodyParser = <span class="hljs-built_in">require</span>(<span class="hljs-string">'body-parser'</span>);
+<span class="hljs-keyword">var</span> _ = <span class="hljs-built_in">require</span>(<span class="hljs-string">'underscore'</span>);
+<span class="hljs-keyword">var</span> SofiaTree = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./sofia-tree.js'</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-2">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-2">&#182;</a>
+              </div>
+              <p>var agent = require(‘webkit-devtools-agent’);
+agent.start();</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-3">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-3">&#182;</a>
+              </div>
+              <p>A micro REST search service to benchmark SofiaTree performance</p>
+
+            </div>
+            
+        </li>
+        
+        
+        <li id="section-4">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-4">&#182;</a>
+              </div>
+              <p>create application/json parser</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> jsonParser = bodyParser.json({limit: <span class="hljs-string">'5mb'</span>})
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">randomPositive</span><span class="hljs-params">(max)</span></span>{
+
+	<span class="hljs-keyword">return</span> <span class="hljs-built_in">Math</span>.floor((<span class="hljs-built_in">Math</span>.random() * max) + <span class="hljs-number">1</span>);
+}
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">randomSub</span><span class="hljs-params">(w)</span></span>{
+
+	<span class="hljs-keyword">return</span> w.substring(<span class="hljs-number">0</span>,randomPositive(w.length));
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-5">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-5">&#182;</a>
+              </div>
+              <p>Just To compare performance</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">linealSearch</span><span class="hljs-params">(st,dict)</span></span>{
+	<span class="hljs-keyword">var</span> t = process.hrtime();
+
+	<span class="hljs-keyword">var</span> term= st.toLowerCase();
+
+	<span class="hljs-keyword">var</span>	matches=_.filter(dict,<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(word)</span></span>{
+		<span class="hljs-keyword">return</span> word.indexOf(term) === <span class="hljs-number">0</span>;
+	});
+
+	t = process.hrtime(t);
+	<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Found %d results using Lineal search took %d s and %d ms'</span>,matches.length, t[<span class="hljs-number">0</span>], t[<span class="hljs-number">1</span>]/ <span class="hljs-number">1e6</span>);
+	<span class="hljs-keyword">return</span> matches;
+}</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-6">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-6">&#182;</a>
+              </div>
+              <p>Global</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> server = express();
+
+<span class="hljs-keyword">var</span> port=process.argv[<span class="hljs-number">2</span>] || <span class="hljs-number">8000</span>;</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-7">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-7">&#182;</a>
+              </div>
+              <p>Provide sane defaults to avoid errors on empty dictionary searches</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre><span class="hljs-keyword">var</span> dictionary=[];
+
+<span class="hljs-keyword">var</span> sofiaTree= <span class="hljs-keyword">new</span> SofiaTree();</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-8">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-8">&#182;</a>
+              </div>
+              <p>///////////////////////////////////////////////////////////////////////////////////</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>server.post(<span class="hljs-string">'/dictionary/'</span>,jsonParser, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(req, res)</span> </span>{
+
+	<span class="hljs-keyword">if</span> (!req.body) 
+		<span class="hljs-keyword">return</span> res.sendStatus(<span class="hljs-number">400</span>)
+
+	dictionary= e=_.uniq(req.body,<span class="hljs-literal">true</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-9">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-9">&#182;</a>
+              </div>
+              <p>Reset whole tree on each new dictionary submission to reset cache</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>	sofiaTree= <span class="hljs-keyword">new</span> SofiaTree();
+
+	dictionary.forEach(<span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(word)</span></span>{
+		sofiaTree.insert(word);
+	},server);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-10">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-10">&#182;</a>
+              </div>
+              <p>print the just generated tree
+console.log(sofiaTree.buildWordsArray(‘’));</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    res.writeHead(<span class="hljs-number">200</span>, { <span class="hljs-string">'content-type'</span>: <span class="hljs-string">'application/json'</span> });
+    res.write(<span class="hljs-built_in">JSON</span>.stringify({ status: <span class="hljs-string">"ok"</span> }));
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Dictionary loaded with "</span> + dictionary.length + <span class="hljs-string">" entries ["</span> + dictionary[<span class="hljs-number">0</span>] + <span class="hljs-string">",... ...,"</span> + dictionary[dictionary.length -<span class="hljs-number">1</span>] + <span class="hljs-string">"]"</span> );
+
+    res.end();
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-11">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-11">&#182;</a>
+              </div>
+              <p>///////////////////////////////////////////////////////////////////////////////////</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>server.get(<span class="hljs-string">'/search/:term'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(req, res)</span> </span>{
+
+	process.stdout.write(<span class="hljs-string">"Searching for '"</span>+ req.params.term + <span class="hljs-string">"' ..."</span>);</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-12">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-12">&#182;</a>
+              </div>
+              <p>UNCOMMENT THIS to compare SofiaTree with linealSearch &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;
+linealSearch(req.params.term.toLowerCase(),dictionary);</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>
+	<span class="hljs-keyword">var</span> t = process.hrtime();
+	<span class="hljs-keyword">var</span> result=sofiaTree.getCompletions(req.params.term.toLowerCase());
+	t = process.hrtime(t);
+	<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"  %d results found on %d s and %d ms"</span>, result.length, t[<span class="hljs-number">0</span>], t[<span class="hljs-number">1</span>] / <span class="hljs-number">1e6</span>);
+
+	res.writeHead(<span class="hljs-number">200</span>, { <span class="hljs-string">'content-type'</span>: <span class="hljs-string">'application/json'</span> });
+	res.write(<span class="hljs-built_in">JSON</span>.stringify(result));
+
+	res.end();
+});</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-13">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-13">&#182;</a>
+              </div>
+              <p>///////////////////////////////////////////////////////////////////////////////////</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>server.get(<span class="hljs-string">'/gentests/:max'</span>,<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(req, res)</span> </span>{
+
+	<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Generating "</span>+ req.params.max + <span class="hljs-string">" tests"</span>);
+
+	<span class="hljs-keyword">var</span> BASE_URL=<span class="hljs-string">"curl 'http://127.0.0.1:"</span>+ port +<span class="hljs-string">"/search/"</span>
+	<span class="hljs-keyword">var</span> result=[];
+	<span class="hljs-keyword">var</span> i;
+	<span class="hljs-keyword">var</span> randomWord;
+
+	<span class="hljs-keyword">if</span>(dictionary &amp;&amp; dictionary.length)
+		<span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>; i &lt; req.params.max; i++){
+			randomWord=dictionary[randomPositive(dictionary.length)];
+			result.push(BASE_URL + randomSub(randomWord)  + <span class="hljs-string">"'"</span>)
+			<span class="hljs-built_in">console</span>.log(BASE_URL + randomSub(randomWord)  + <span class="hljs-string">"'"</span>)
+		}
+
+	res.writeHead(<span class="hljs-number">200</span>, { <span class="hljs-string">'content-type'</span>: <span class="hljs-string">'application/json'</span> });
+	res.write(<span class="hljs-built_in">JSON</span>.stringify(result));
+	res.end();
+});
+
+
+server.listen(port);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"Server started at port "</span> + port + <span class="hljs-string">"..."</span>)</pre></div></div>
+            
+        </li>
+        
+    </ul>
+  </div>
+</body>
+</html>

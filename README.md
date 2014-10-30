@@ -1,12 +1,11 @@
-
-
 # Sofia Tree
-==================
+============
 A fast-recovery data structure to support auto-complete as you type features.
--------------------------------
+-----------------------------------------------------------------------------
 
 
-A kind of [*Radix Tree*](http://en.wikipedia.org/wiki/Radix_tree) data structure baptized 'Sofia Tree' in honour to my beloved daughter. A multinode tree with a level for each letter with fast lookup operations. See [*Anottated Source*](https://github.com/jaimeagudo/sofiatree/docs/sofia-tree.html)
+A kind of [*Radix Tree*](http://en.wikipedia.org/wiki/Radix_tree) data structure baptized 'Sofia Tree' in honour to my beloved daughter. A multinode tree with a level for each letter with fast lookup operations. See [*Anottated Source*](
+http://htmlpreview.github.io/?https://github.com/jaimeagudo/sofiatree/blob/master/docs/sofia-tree.html)
 
 
 ## Quick and simple usage example
@@ -47,3 +46,9 @@ Clone the whole repo and run `npm test` to load a micro search engine, in anothe
 * Return results as stream
 * Case-sensitive lookups? 
 * Any ideas? :)
+
+
+
+=======================
+Made with ❤ in Spain
+
