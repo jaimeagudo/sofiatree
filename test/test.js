@@ -1,13 +1,5 @@
-var chai = require('chai');
-var assert = chai.assert;
-
 var _ = require('underscore');
-// var SofiaTree = require('../sofia-tree');
 var SofiaTree = require('../');
-
-
-var testCase  = require('nodeunit').testCase;
-
 
 module.exports = {
 
@@ -34,5 +26,3 @@ module.exports = {
         test.done();
     }
 };
-
-
