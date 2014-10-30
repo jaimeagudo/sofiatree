@@ -41,7 +41,7 @@ http://htmlpreview.github.io/?https://github.com/jaimeagudo/sofiatree/blob/maste
 
 
 * ~~Define nice jasmine tests and setup Travis~~
-* Comment the example API usage
+* ~~Comment the example API usage~~
 * Reduce prefixes stack memory comsuption 
 * Partial cache invalidation mechanism when inserting new words (it actually resets the whole cache upon insertion of new words.)
 * Return results as stream

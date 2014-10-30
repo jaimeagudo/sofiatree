@@ -1,6 +1,6 @@
 {
   "name": "sofia-tree",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A kind of Radix Tree data structure baptized 'Sofia Tree' in honour to my beloved daughter. A multinode tree with a level for each letter with fast lookup operations.",
   "author": "Jaime Agudo <jaime.agudo.lopez@gmail.com>",
   "license": "MIT",

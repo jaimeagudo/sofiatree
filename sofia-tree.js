@@ -1,4 +1,4 @@
-//		SofiaTree 0.0.1
+//		SofiaTree 0.0.2
 
 //	A kind of *Radix tree* data structure baptized **Sofia Tree** in honour to my 
 //	beloved daughter.
