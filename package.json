@@ -5,27 +5,30 @@
   "author": "Jaime Agudo <jaime.agudo.lopez@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "uglifyjs": "~2.3.6",
-    "docco": "~0.6.3"
   },
   "main": "sofia-tree.js",
   "devDependencies": {
-    "body-parser": "~1.9.1",
-    "chai": "^1.9.2",
-    "docco": "0.6.x",
     "express": "~4.9.8",
-    "mocha": "^2.0.1",
-    "sinon": "^1.11.1",
+    "body-parser": "~1.9.1",
     "supervisor": "~0.6.0",
-    "underscore": "~1.7.0",
-    "webkit-devtools-agent": "~0.3.1"
+    "webkit-devtools-agent": "~0.3.1",
+    "uglifyjs": "~2.3.6",
+    "docco": "~0.6.3",
+    "chai": "^1.9.2",
+    "coveralls": "^2.11.2",
+    "docco": "0.6.x",
+    "jscoverage": "^0.5.8",
+    "nodeunit": "^0.9.0",
+    "sinon": "^1.11.1",
+    "underscore": "~1.7.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/jaimeagudo/sofiatree.git"
   },
   "scripts": {
-    "test": "mocha",
+    "test": "nodeunit test",
+    "coveralls": "jscoverage lib && SOFIATREE_COVERAGE=1 nodeunit --reporter=lcov test | coveralls",
     "example": "node example/server.js",
     "doc": "docco sofia-tree.js && docco example/server.js",
     "uglify": "uglifyjs sofia-tree.js -c \"evaluate=false\" -m --source-map sofia-tree-min.map -o sofia-tree-min.js"

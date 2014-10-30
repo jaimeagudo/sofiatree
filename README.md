@@ -1,5 +1,7 @@
-# Sofia Tree [![Build Status](https://travis-ci.org/jaimeagudo/sofiatree.svg?branch=master)](https://travis-ci.org/jaimeagudo/sofiatree)
-============
+# Sofia Tree
+[![Build Status](https://travis-ci.org/jaimeagudo/sofiatree.svg?branch=master)](https://travis-ci.org/jaimeagudo/sofiatree)
+[![Coverage Status](https://coveralls.io/repos/jaimeagudo/sofiatree/badge.png)](https://coveralls.io/r/jaimeagudo/sofiatree)
+
 A fast-recovery data structure to support auto-complete as you type features.
 -----------------------------------------------------------------------------
 

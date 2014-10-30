@@ -2,7 +2,8 @@ var chai = require('chai');
 var assert = chai.assert;
 
 var _ = require('underscore');
-var SofiaTree = require('../sofia-tree');
+// var SofiaTree = require('../sofia-tree');
+var SofiaTree = require('../');
 
 describe('SofiaTree very basic test suite', function() {
 

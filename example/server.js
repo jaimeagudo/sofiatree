@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var _ = require('underscore');
-var SofiaTree = require('../sofia-tree.js');
+var SofiaTree = require('../');
 // A micro REST search service to benchmark SofiaTree performance against lineal search
 // ------------------------------------------------------------------------------------
 
