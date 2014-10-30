@@ -5,24 +5,34 @@ var _ = require('underscore');
 // var SofiaTree = require('../sofia-tree');
 var SofiaTree = require('../');
 
-describe('SofiaTree very basic test suite', function() {
 
-	var dictionary=["b","bar","barbar","f","foo","foobar"];
-	var sofiaTree= new SofiaTree({useCache: true});
+var testCase  = require('nodeunit').testCase;
 
 
-	dictionary.forEach(function(word){
-		sofiaTree.insert(word);
-	},this);
-	
+module.exports = {
 
-	it("Retrieve all the completions starting by foo",function(){
-		assert.deepEqual(sofiaTree.getCompletions("foo"),["foo","foobar"]);
-	});
+	setUp: function (callback) {
+		this.dictionary=["b","bar","barbar","f","foo","foobar"];
+		this.sofiaTree= new SofiaTree({useCache: true});
+
+        this.dictionary.forEach(function(word){
+        	this.sofiaTree.insert(word);
+        },this);
+
+        callback();
+	},
+
+    "Retrieve all the completions starting by foo": function(test) {
+
+        test.deepEqual(this.sofiaTree.getCompletions("foo"),["foo","foobar"]);
+        test.done();
+    },
+
+    "Prints the whole dictionary when asking for empty string": function(test) {
+
+    	test.deepEqual(_.sortBy(this.sofiaTree.getCompletions()),this.dictionary);
+        test.done();
+    }
+};
 
 
-	it("Prints the whole dictionary when asking for empty string",function(){
-		assert.deepEqual(_.sortBy(sofiaTree.getCompletions()),dictionary);
-	});
-
-  });
