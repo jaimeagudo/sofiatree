@@ -21,7 +21,9 @@
   },
   "scripts": {
     "test": "node example.js",
-    "doc": "docco sofia-tree.js"
+    "doc": "docco sofia-tree.js",
+    "prepublish": "uglifyjs sofia-tree.js -c \"evaluate=false\" -m --source-map sofia-tree-min.map -o sofia-tree-min.js",
+    "build": "uglifyjs sofia-tree.js -c \"evaluate=false\" -m --source-map sofia-tree-min.map -o sofia-tree-min.js"
   },
   "analyze": true
 }
