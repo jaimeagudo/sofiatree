@@ -20,9 +20,27 @@ module.exports = {
         test.done();
     },
 
+    "Retrieve all the completions starting by foo using recursive implementation": function(test) {
+
+        test.deepEqual(this.sofiaTree.getCompletions("foo",true),["foo","foobar"]);
+        test.done();
+    },
+
     "Prints the whole dictionary when asking for empty string": function(test) {
 
     	test.deepEqual(_.sortBy(this.sofiaTree.getCompletions()),this.dictionary);
+        test.done();
+    },
+
+    "Results are not case sensitive": function(test) {
+    	test.deepEqual(_.sortBy(this.sofiaTree.getCompletions("FoO")),["foo","foobar"]);
+        test.done();
+    },
+
+    "Inserting new words and retrieval works": function(test) {
+    	this.sofiaTree.insert("SOFIA");
+    	test.deepEqual(_.sortBy(this.sofiaTree.getCompletions("Sofia")),["sofia"]);
+    	test.deepEqual(this.sofiaTree.getCompletions("foo"),["foo","foobar"]);
         test.done();
     }
 };
