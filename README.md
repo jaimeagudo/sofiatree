@@ -33,13 +33,14 @@ console.log(sofiaTree.getCompletions(""));
 
 ## A real world example
 
-Clone the whole repo and run `npm test` to load a micro search engine, in another console run `tests.sh` to load a 350,000 words dictionary and launch 1,500 searchs with 100 threads in parallel.
+Clone the whole repo and run `npm run example` to load a micro search engine, in another console run `cd example && ./test.sh` to load a 350,000 words dictionary and launch 1,500 searchs with 100 threads in parallel. See [*Anottated Source*](
+http://htmlpreview.github.io/?https://github.com/jaimeagudo/sofiatree/blob/master/docs/server.html) and [shell scripts](https://github.com/jaimeagudo/sofiatree/tree/master/example)
 
 =======================
 ## To be done
 
 
-* Define nice jasmine tests and setup Travis
+* ~~Define nice jasmine tests and setup Travis~~
 * Comment the example API usage
 * Reduce prefixes stack memory comsuption 
 * Partial cache invalidation mechanism when inserting new words (it actually resets the whole cache upon insertion of new words.)

@@ -144,7 +144,7 @@ SofiaTree.prototype.__buildWordsArrayRec=function (p, useCache, matches){
 // * return `matches` the array of words that start with the given prefix
 
 SofiaTree.prototype.getCompletions= function(prefix, recursive){
-	prefix=prefix || "";
+	prefix= typeof prefix == 'string' ? prefix.toLowerCase() : "";
 
 	//Tree depth index
     var depth, node;
@@ -173,14 +173,14 @@ SofiaTree.prototype.getCompletions= function(prefix, recursive){
 // * return `this` for chaining convenience
 // 
 SofiaTree.prototype.insert= function(word){
-	word=word.toLowerCase();
-
     var depth;
 	var node = this;
 
     // This eliminate empty strings
-    if(!word || ! word.length)
+    if(typeof word != 'string' || !word.length)
     	return;
+
+    word=word.toLowerCase();
 
 	//Find the last letter of the new word already present in the tree
     for(depth=0; depth < word.length && node.children && node.children[word[depth]]; depth++ ){ 

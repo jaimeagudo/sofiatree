@@ -1,12 +1,15 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var _ = require('underscore');
-var SofiaTree = require('./sofia-tree.js');
+var SofiaTree = require('../sofia-tree.js');
+// A micro REST search service to benchmark SofiaTree performance against lineal search
+// ------------------------------------------------------------------------------------
+
 
 // var agent = require('webkit-devtools-agent');
 // agent.start();
 
-// A micro REST search service to benchmark SofiaTree performance
+
 
 // create application/json parser
 var jsonParser = bodyParser.json({limit: '5mb'})
@@ -33,13 +36,14 @@ function linealSearch(st,dict){
 	});
 
 	t = process.hrtime(t);
-	console.log('Found %d results using Lineal search took %d s and %d ms',matches.length, t[0], t[1]/ 1e6);
+	console.log("  %d results found on %d s and %d ms using lineal search", matches.length, t[0], t[1] / 1e6);
 	return matches;
 }
 
 // Global
 var server = express();
 
+// It takes first argument as the listening port, defaults to 8000
 var port=process.argv[2] || 8000;
 
 //Provide sane defaults to avoid errors on empty dictionary searches
@@ -47,7 +51,7 @@ var dictionary=[];
 
 var sofiaTree= new SofiaTree();
 
-// ///////////////////////////////////////////////////////////////////////////////////
+
 server.post('/dictionary/',jsonParser, function (req, res) {
 
 	if (!req.body) 
@@ -62,7 +66,7 @@ server.post('/dictionary/',jsonParser, function (req, res) {
 	},server);
 
 	//print the just generated tree
-	// console.log(sofiaTree.buildWordsArray(''));
+	// console.log(sofiaTree.getCompletions(''));
     res.writeHead(200, { 'content-type': 'application/json' });
     res.write(JSON.stringify({ status: "ok" }));
     console.log("Dictionary loaded with " + dictionary.length + " entries [" + dictionary[0] + ",... ...," + dictionary[dictionary.length -1] + "]" );
@@ -72,17 +76,18 @@ server.post('/dictionary/',jsonParser, function (req, res) {
 
 
 
-// ///////////////////////////////////////////////////////////////////////////////////
+
 server.get('/search/:term',function (req, res) {
 
-	process.stdout.write("Searching for '"+ req.params.term + "' ...");
-	// UNCOMMENT THIS to compare SofiaTree with linealSearch >>>>>>>>>>>
-	// linealSearch(req.params.term.toLowerCase(),dictionary);
+	console.log("Searching for '"+ req.params.term + "' ...");
+	// Comment this to compare perfomance betwen SofiaTree and linealSearch 
+	
+	linealSearch(req.params.term.toLowerCase(),dictionary); 
 
 	var t = process.hrtime();
-	var result=sofiaTree.getCompletions(req.params.term.toLowerCase());
+	var result=sofiaTree.getCompletions(req.params.term);
 	t = process.hrtime(t);
-	console.log("  %d results found on %d s and %d ms", result.length, t[0], t[1] / 1e6);
+	console.log("  %d results found on %d s and %d ms using SofiaTree", result.length, t[0], t[1] / 1e6);
 
 	res.writeHead(200, { 'content-type': 'application/json' });
 	res.write(JSON.stringify(result));
@@ -90,12 +95,12 @@ server.get('/search/:term',function (req, res) {
 	res.end();
 });
 
-// ///////////////////////////////////////////////////////////////////////////////////
+
 server.get('/gentests/:max',function (req, res) {
 
 	console.log("Generating "+ req.params.max + " tests");
 
-	var BASE_URL="curl 'http://127.0.0.1:"+ port +"/search/"
+	var BASE_URL="curl 'http://127.0.0.1:" + port +"/search/"
 	var result=[];
 	var i;
 	var randomWord;
