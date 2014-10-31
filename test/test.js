@@ -38,9 +38,26 @@ module.exports = {
     },
 
     "Inserting new words and retrieval works": function(test) {
+
     	this.sofiaTree.insert("SOFIA");
     	test.deepEqual(_.sortBy(this.sofiaTree.getCompletions("Sofia")),["sofia"]);
     	test.deepEqual(this.sofiaTree.getCompletions("foo"),["foo","foobar"]);
         test.done();
-    }
+    },
+
+    "It works well without cache also": function(test) {
+
+	 	this.sofiaTree= new SofiaTree();
+
+        this.dictionary.forEach(function(word){
+        	test.equal(this.sofiaTree,this.sofiaTree.insert(word));
+        },this);
+
+    	this.sofiaTree.insert("SOFIA");
+    	test.deepEqual(_.sortBy(this.sofiaTree.getCompletions("Sofia")),["sofia"]);
+    	test.deepEqual(this.sofiaTree.getCompletions("foo"),["foo","foobar"]);
+        test.done();
+    },
+
+    
 };
