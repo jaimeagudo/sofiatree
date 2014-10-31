@@ -38,6 +38,11 @@ console.log(sofiaTree.getCompletions("foo"));
 
 ["foo","foobar"]
 
+//Retrieve all the completions without the prefix
+console.log(sofiaTree.getCompletions("foo"));
+
+["foobar"]
+
 //Prints the whole dictionary	
 console.log(sofiaTree.getCompletions(""));	
 ["f","foo","foobar","b","bar","barbar"]
@@ -58,7 +63,7 @@ http://htmlpreview.github.io/?https://github.com/jaimeagudo/sofiatree/blob/maste
 * ~~Partial cache invalidation mechanism when inserting new words (it actually resets the whole cache upon insertion of new words.)~~
 * Implement remove method
 * Return results as stream
-* Case-sensitive lookups? Not sure if it's a valuable adition
+* Case-sensitive lookups? Not sure if it's a valuable aditio
 * Any ideas? :)
 
 

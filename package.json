@@ -1,6 +1,6 @@
 {
   "name": "sofia-tree",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A kind of Radix Tree data structure. A fast in-memory dictionary for autocomplete as you type features.",
   "author": "Jaime Agudo <jaime.agudo.lopez@gmail.com>",
   "license": "MIT",
