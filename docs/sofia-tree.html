@@ -27,7 +27,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <pre><code>SofiaTree <span class="hljs-number">0.0</span><span class="hljs-number">.2</span>
+              <pre><code>SofiaTree <span class="hljs-number">0.0</span><span class="hljs-number">.4</span>
 </code></pre>
             </div>
             
@@ -56,7 +56,7 @@ beloved daughter.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Author: Jaime Agudo <a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#x6f;&#58;&#x6a;&#97;&#105;&#x6d;&#x65;&#x2e;&#x61;&#x67;&#x75;&#x64;&#x6f;&#46;&#108;&#x6f;&#112;&#x65;&#x7a;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;">&#x6a;&#97;&#105;&#x6d;&#x65;&#x2e;&#x61;&#x67;&#x75;&#x64;&#x6f;&#46;&#108;&#x6f;&#112;&#x65;&#x7a;&#64;&#x67;&#109;&#x61;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#x6d;</a></p>
+              <p>Author: Jaime Agudo <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#x6f;&#x3a;&#106;&#x61;&#105;&#x6d;&#x65;&#46;&#x61;&#103;&#x75;&#100;&#x6f;&#x2e;&#108;&#x6f;&#x70;&#101;&#x7a;&#64;&#103;&#x6d;&#97;&#105;&#108;&#46;&#x63;&#111;&#x6d;">&#106;&#x61;&#105;&#x6d;&#x65;&#46;&#x61;&#103;&#x75;&#100;&#x6f;&#x2e;&#108;&#x6f;&#x70;&#101;&#x7a;&#64;&#103;&#x6d;&#97;&#105;&#108;&#46;&#x63;&#111;&#x6d;</a></p>
 <p>Github: <a href="https://github.com/jaimeagudo/sofiatree/">https://github.com/jaimeagudo/sofiatree/</a></p>
 <p>License: MIT</p>
 
@@ -348,7 +348,7 @@ SofiaTree.prototype.__buildWordsArrayRec=<span class="hljs-function"><span class
    		});
    	} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.children){
    		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">var</span> letter <span class="hljs-keyword">in</span> <span class="hljs-keyword">this</span>.children){
-   			<span class="hljs-keyword">this</span>.children[letter].buildWordsArray(p + letter, matches);
+   			<span class="hljs-keyword">this</span>.children[letter].__buildWordsArrayRec(p + letter, useCache, matches);
    		}
    	}
 	<span class="hljs-keyword">if</span>(useCache)
@@ -382,6 +382,7 @@ SofiaTree.prototype.__buildWordsArrayRec=<span class="hljs-function"><span class
               <p>It returns an array of the words present in the tree that start with the given prefix</p>
 <ul>
 <li><code>prefix</code> prefix to be completed</li>
+<li><code>excludePrefix</code> OPTIONAL, defaults to false. If true it won’t return the given prefix even if it’s a valid word in the dictionary. </li>
 <li><code>recursive</code> OPTIONAL, defaults to false. To use recursive implementation to traverse the tree and build the result array. </li>
 <li>return <code>matches</code> the array of words that start with the given prefix</li>
 </ul>
@@ -389,7 +390,7 @@ SofiaTree.prototype.__buildWordsArrayRec=<span class="hljs-function"><span class
             </div>
             
             <div class="content"><div class='highlight'><pre>
-SofiaTree.prototype.getCompletions= <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(prefix, recursive)</span></span>{
+SofiaTree.prototype.getCompletions= <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(prefix, excludePrefix, recursive)</span></span>{
 	prefix= <span class="hljs-keyword">typeof</span> prefix == <span class="hljs-string">'string'</span> ? prefix.toLowerCase() : <span class="hljs-string">""</span>;</pre></div></div>
             
         </li>
@@ -427,8 +428,8 @@ SofiaTree.prototype.getCompletions= <span class="hljs-function"><span class="hlj
     	node = node.children[prefix[depth]];
     } 
 		
-	<span class="hljs-keyword">return</span> recursive ? node.__buildWordsArrayRec(prefix, <span class="hljs-keyword">this</span>.useCache, []) : 
-					   node.__buildWordsArray(prefix, <span class="hljs-keyword">this</span>.useCache);
+	<span class="hljs-keyword">return</span> (recursive ? node.__buildWordsArrayRec(prefix, <span class="hljs-keyword">this</span>.useCache, []) : 
+					    node.__buildWordsArray(prefix, <span class="hljs-keyword">this</span>.useCache)).slice(!!excludePrefix);
 	
 }</pre></div></div>
             
@@ -466,7 +467,8 @@ it won’t duplicate words</p>
             
             <div class="content"><div class='highlight'><pre>SofiaTree.prototype.insert= <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(word)</span></span>{
     <span class="hljs-keyword">var</span> depth;
-	<span class="hljs-keyword">var</span> node = <span class="hljs-keyword">this</span>;</pre></div></div>
+	<span class="hljs-keyword">var</span> node = <span class="hljs-keyword">this</span>;
+	<span class="hljs-keyword">var</span> toInvalidate=[];</pre></div></div>
             
         </li>
         
@@ -499,9 +501,7 @@ it won’t duplicate words</p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">for</span>(depth=<span class="hljs-number">0</span>; depth &lt; word.length &amp;&amp; node.children &amp;&amp; node.children[word[depth]]; depth++ ){ 
-    	node = node.children[word[depth]]
-    }</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">for</span>(depth=<span class="hljs-number">0</span>; depth &lt; word.length &amp;&amp; node.children &amp;&amp; node.children[word[depth]]; depth++ ){</pre></div></div>
             
         </li>
         
@@ -512,12 +512,14 @@ it won’t duplicate words</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-26">&#182;</a>
               </div>
-              <p>Append new nodes for each remaining letter, if necessary. This eliminate duplicates</p>
+              <p>Save the nodes that contain cache to be invalidated if the word isn’t duplicated </p>
 
             </div>
             
-            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> (depth &lt; word.length)
-    	<span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>){</pre></div></div>
+            <div class="content"><div class='highlight'><pre>    	<span class="hljs-keyword">if</span>(node.cache)
+    		toInvalidate.push(node);
+    	node = node.children[word[depth]]
+    }</pre></div></div>
             
         </li>
         
@@ -527,6 +529,40 @@ it won’t duplicate words</p>
               
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-27">&#182;</a>
+              </div>
+              <p>Append new nodes for each remaining letter, if necessary. This eliminate duplicates</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    <span class="hljs-keyword">if</span> (depth &lt; word.length){</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-28">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-28">&#182;</a>
+              </div>
+              <p>Invalidate cache in all nodes above it. We could do it on the previous loop 
+but it would be innecessary if the word was already present on the tree</p>
+
+            </div>
+            
+            <div class="content"><div class='highlight'><pre>    	<span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> n <span class="hljs-keyword">in</span> toInvalidate){
+    		<span class="hljs-keyword">delete</span> n.cache;
+    	}
+    	<span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>){</pre></div></div>
+            
+        </li>
+        
+        
+        <li id="section-29">
+            <div class="annotation">
+              
+              <div class="pilwrap ">
+                <a class="pilcrow" href="#section-29">&#182;</a>
               </div>
               <p>Create a new children property </p>
 
@@ -540,11 +576,11 @@ it won’t duplicate words</p>
         </li>
         
         
-        <li id="section-28">
+        <li id="section-30">
             <div class="annotation">
               
               <div class="pilwrap ">
-                <a class="pilcrow" href="#section-28">&#182;</a>
+                <a class="pilcrow" href="#section-30">&#182;</a>
               </div>
               <p>We already inserted the last word letter, make the node as a word</p>
 
@@ -557,6 +593,7 @@ it won’t duplicate words</p>
 	        node = node.children[word[depth]];
 	        depth++;
 	    }
+    }
 	<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
 }
 

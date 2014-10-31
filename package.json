@@ -13,6 +13,7 @@
     "patricia",
     "tree",
     "type",
+    "typeahead",
     "memory",
     "dictionary"
   ],
@@ -39,7 +40,7 @@
     "test": "nodeunit test",
     "coveralls": "jscoverage lib && SOFIATREE_COVERAGE=1 nodeunit --reporter=lcov test | coveralls",
     "example": "node example/server.js",
-    "doc": "docco sofia-tree.js && docco example/server.js",
+    "doc": "docco lib/sofia-tree.js && docco example/server.js",
     "uglify": "uglifyjs sofia-tree.js -c \"evaluate=false\" -m --source-map sofia-tree-min.map -o sofia-tree-min.js"
   },
   "analyze": true
