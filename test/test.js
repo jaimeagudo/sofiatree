@@ -19,10 +19,14 @@ module.exports = {
         test.deepEqual(this.sofiaTree.getCompletions("foo"),["foo","foobar"]);
         test.done();
     },
+    "Retrieve all the completions but the prefix itself when excluding": function(test) {
 
+        test.deepEqual(this.sofiaTree.getCompletions("foo",true),["foobar"]);
+        test.done();
+    },
     "Retrieve all the completions starting by foo using recursive implementation": function(test) {
 
-        test.deepEqual(this.sofiaTree.getCompletions("foo",true),["foo","foobar"]);
+        test.deepEqual(this.sofiaTree.getCompletions("foo",false,true),["foo","foobar"]);
         test.done();
     },
 

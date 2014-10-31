@@ -1,16 +1,20 @@
 {
   "name": "sofia-tree",
   "version": "0.0.3",
-  "description": "A kind of Radix Tree data structure. A multinode tree with a level for each letter with fast lookup operations to support autocomplete as you type features.",
+  "description": "A kind of Radix Tree data structure. A fast in-memory dictionary for autocomplete as you type features.",
   "author": "Jaime Agudo <jaime.agudo.lopez@gmail.com>",
   "license": "MIT",
   "keywords":[
+    "auto-complete",
     "autocomplete",
+    "complete",
     "radix",
     "sofia",
     "patricia",
     "tree",
-    "type"
+    "type",
+    "memory",
+    "dictionary"
   ],
   "dependencies": { },
   "main": "sofia-tree.js",
