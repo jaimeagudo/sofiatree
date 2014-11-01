@@ -63,5 +63,23 @@ module.exports = {
         test.done();
     },
 
+    "Case sensitive insertions and retrieval are consistent": function(test) {
+
+        this.sofiaTree= new SofiaTree({caseSensitive: true});
+        test.equal(this.sofiaTree.isCaseSensitive(),true);
+
+        this.dictionary.forEach(function(word){
+            test.equal(this.sofiaTree,this.sofiaTree.insert(word));
+        },this);
+
+
+        test.deepEqual(this.sofiaTree.getCompletions("Foo"),[]);
+        test.deepEqual(this.sofiaTree.getCompletions("foo"),["foo","foobar"]);
+        this.sofiaTree.insert("FOO");
+        test.deepEqual(this.sofiaTree.getCompletions("F"),["FOO"]);
+        test.deepEqual(this.sofiaTree.getCompletions("foo"),["foo","foobar"]);
+        test.done();
+    },
+
     
 };

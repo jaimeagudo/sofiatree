@@ -63,7 +63,7 @@ http://htmlpreview.github.io/?https://github.com/jaimeagudo/sofiatree/blob/maste
 * ~~Partial cache invalidation mechanism when inserting new words (it actually resets the whole cache upon insertion of new words.)~~
 * Implement remove method
 * Return results as stream
-* Case-sensitive lookups? Not sure if it's a valuable adition
+* ~~Case-sensitive lookups? Not sure if it's a valuable adition~~
 * Any ideas? :)
 
 
