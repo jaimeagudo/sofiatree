@@ -1,4 +1,5 @@
 # Sofia Tree
+[![NPM](https://nodei.co/npm/sofia-tree.png?downloads=true)](https://nodei.co/npm/sofia-tree/)
 [![Build Status](https://travis-ci.org/jaimeagudo/sofiatree.svg?branch=master)](https://travis-ci.org/jaimeagudo/sofiatree)
 [![Coverage Status](https://coveralls.io/repos/jaimeagudo/sofiatree/badge.png)](https://coveralls.io/r/jaimeagudo/sofiatree)
 
