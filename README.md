@@ -14,6 +14,7 @@ http://htmlpreview.github.io/?https://github.com/jaimeagudo/sofiatree/blob/maste
 * Non-recursive tree traverse implementation to keep memory usage low and speed up on lookup operations.
 * Optional built-in cache for even faster lookups.
 * Efficient in-memory data structure, no redis, no dependencies
+* Optionally case sensitive
 * Batteries included example to benchmark its performance
 
 ## Install
@@ -28,7 +29,10 @@ var SofiaTree=require('sofia-tree');
 
 var dictionary=["f","foo","foobar","b","bar","barbar"];
 
-var sofiaTree= new SofiaTree({useCache: true});
+var sofiaTree= new SofiaTree({
+	useCache: true,
+	caseSensitive: false
+});
 
 dictionary.forEach(function(word){
 	sofiaTree.insert(word);
