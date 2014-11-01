@@ -44,7 +44,7 @@ console.log(sofiaTree.getCompletions("foo"));
 ["foo","foobar"]
 
 //Retrieve all the completions without the prefix
-console.log(sofiaTree.getCompletions("foo"));
+console.log(sofiaTree.getCompletions("foo",true));
 
 ["foobar"]
 
