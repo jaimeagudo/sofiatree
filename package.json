@@ -1,6 +1,6 @@
 {
   "name": "sofia-tree",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A fast in-memory dictionary for autocomplete as you type features based on a trie data structure.",
   "author": "Jaime Agudo <jaime.agudo.lopez@gmail.com>",
   "license": "MIT",

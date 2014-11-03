@@ -27,7 +27,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <pre><code>SofiaTree <span class="hljs-number">0.0</span><span class="hljs-number">.7</span>
+              <pre><code>SofiaTree <span class="hljs-number">0.0</span><span class="hljs-number">.8</span>
 </code></pre>
             </div>
             
@@ -56,7 +56,7 @@ beloved daughter.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Author: Jaime Agudo <a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#58;&#106;&#x61;&#105;&#x6d;&#x65;&#x2e;&#x61;&#x67;&#117;&#100;&#111;&#46;&#x6c;&#x6f;&#112;&#x65;&#122;&#x40;&#x67;&#109;&#x61;&#105;&#108;&#x2e;&#x63;&#111;&#109;">&#106;&#x61;&#105;&#x6d;&#x65;&#x2e;&#x61;&#x67;&#117;&#100;&#111;&#46;&#x6c;&#x6f;&#112;&#x65;&#122;&#x40;&#x67;&#109;&#x61;&#105;&#108;&#x2e;&#x63;&#111;&#109;</a></p>
+              <p>Author: Jaime Agudo <a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#x6f;&#x3a;&#x6a;&#97;&#x69;&#x6d;&#x65;&#46;&#97;&#x67;&#x75;&#x64;&#x6f;&#46;&#x6c;&#x6f;&#112;&#x65;&#122;&#x40;&#103;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#109;">&#x6a;&#97;&#x69;&#x6d;&#x65;&#46;&#97;&#x67;&#x75;&#x64;&#x6f;&#46;&#x6c;&#x6f;&#112;&#x65;&#122;&#x40;&#103;&#109;&#x61;&#105;&#x6c;&#46;&#x63;&#111;&#109;</a></p>
 <p>Github: <a href="https://github.com/jaimeagudo/sofiatree/">https://github.com/jaimeagudo/sofiatree/</a></p>
 <p>License: MIT</p>
 
@@ -214,7 +214,7 @@ SofiaTree.prototype.getCompletions= <span class="hljs-function"><span class="hlj
 		excludePrefix = !!excludePrefix.excludePrefix; 
 	}<span class="hljs-keyword">else</span>{
 		<span class="hljs-keyword">if</span>(<span class="hljs-keyword">typeof</span> maxResults == <span class="hljs-string">'number'</span>)
-			maxMatches = excludePrefix ? maxResults +<span class="hljs-number">1</span> : maxResults;
+			maxResults = excludePrefix ? maxResults +<span class="hljs-number">1</span> : maxResults;
 		<span class="hljs-keyword">else</span> 
 			maxResults= <span class="hljs-built_in">Number</span>.POSITIVE_INFINITY; 
 	}</pre></div></div>
@@ -548,7 +548,10 @@ but it would be innecessary if the word was already present on the tree</p>
 	        node = node.children[word[depth]];
 	        depth++;
 	    }
+    }<span class="hljs-keyword">else</span>{
+    	node.isWord=<span class="hljs-literal">true</span>;
     }
+
 	<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
 }
 
