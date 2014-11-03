@@ -27,7 +27,7 @@
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-1">&#182;</a>
               </div>
-              <pre><code>SofiaTree <span class="hljs-number">0.0</span><span class="hljs-number">.6</span>
+              <pre><code>SofiaTree <span class="hljs-number">0.0</span><span class="hljs-number">.7</span>
 </code></pre>
             </div>
             
@@ -56,7 +56,7 @@ beloved daughter.</p>
               <div class="pilwrap ">
                 <a class="pilcrow" href="#section-3">&#182;</a>
               </div>
-              <p>Author: Jaime Agudo <a href="&#109;&#x61;&#105;&#x6c;&#x74;&#x6f;&#58;&#106;&#x61;&#105;&#x6d;&#101;&#x2e;&#97;&#103;&#x75;&#x64;&#111;&#x2e;&#108;&#111;&#x70;&#101;&#122;&#x40;&#103;&#109;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#x6d;">&#106;&#x61;&#105;&#x6d;&#101;&#x2e;&#97;&#103;&#x75;&#x64;&#111;&#x2e;&#108;&#111;&#x70;&#101;&#122;&#x40;&#103;&#109;&#97;&#x69;&#x6c;&#x2e;&#99;&#111;&#x6d;</a></p>
+              <p>Author: Jaime Agudo <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#111;&#x3a;&#106;&#97;&#x69;&#109;&#101;&#46;&#97;&#x67;&#117;&#100;&#x6f;&#46;&#108;&#x6f;&#112;&#x65;&#x7a;&#x40;&#x67;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#x6f;&#109;">&#106;&#97;&#x69;&#109;&#101;&#46;&#97;&#x67;&#117;&#100;&#x6f;&#46;&#108;&#x6f;&#112;&#x65;&#x7a;&#x40;&#x67;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#x6f;&#109;</a></p>
 <p>Github: <a href="https://github.com/jaimeagudo/sofiatree/">https://github.com/jaimeagudo/sofiatree/</a></p>
 <p>License: MIT</p>
 
@@ -614,6 +614,8 @@ but it would be innecessary if the word was already present on the tree</p>
 	        node = node.children[word[depth]];
 	        depth++;
 	    }
+    } <span class="hljs-keyword">else</span>{
+    	node.isWord=<span class="hljs-literal">true</span>;
     }
 	<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
 }
