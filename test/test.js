@@ -4,7 +4,7 @@ var SofiaTree = require('../');
 module.exports = {
 
 	setUp: function (callback) {
-		this.dictionary=["b","bar","barbar","f","foo","foobar"];
+		this.dictionary=["b","bar","barbar","f","foo","foobar","ju","jump","junction","jungle","junk","just"].reverse();
 		this.sofiaTree= new SofiaTree({useCache: true});
 
         this.dictionary.forEach(function(word){
@@ -49,6 +49,15 @@ module.exports = {
         test.done();
     },
 
+
+    "Limiting results number": function(test) {
+
+        test.deepEqual(_.sortBy(this.sofiaTree.getCompletions("ju",false,3)),["ju","junk","just"]);
+        test.deepEqual(_.sortBy(this.sofiaTree.getCompletions("ju",true,3)),["jungle","junk","just"]);
+        test.done();
+    },
+
+
     "It works well without cache also": function(test) {
 
 	 	this.sofiaTree= new SofiaTree();
@@ -81,5 +90,6 @@ module.exports = {
         test.done();
     },
 
-    
+
+
 };
