@@ -1,20 +1,21 @@
 {
   "name": "sofia-tree",
-  "version": "0.0.7",
-  "description": "A kind of Radix Tree (trie) data structure. A fast in-memory dictionary for autocomplete as you type features.",
+  "version": "0.0.8",
+  "description": "A fast in-memory dictionary for autocomplete as you type features based on a trie data structure.",
   "author": "Jaime Agudo <jaime.agudo.lopez@gmail.com>",
   "license": "MIT",
   "keywords":[
     "auto-complete",
     "autocomplete",
     "complete",
+    "trie",
     "radix",
+    "typeahead",
     "trie",
     "sofia",
     "patricia",
     "tree",
     "type",
-    "typeahead",
     "memory",
     "dictionary"
   ],
@@ -42,7 +43,7 @@
     "coveralls": "jscoverage lib && SOFIATREE_COVERAGE=1 nodeunit --reporter=lcov test | coveralls",
     "example": "node example/server.js",
     "doc": "docco lib/sofia-tree.js && docco example/server.js",
-    "uglify": "uglifyjs sofia-tree.js -c \"evaluate=false\" -m --source-map sofia-tree-min.map -o sofia-tree-min.js"
+    "uglify": "uglifyjs lib/sofia-tree.js -c \"evaluate=false\" -m --source-map sofia-tree-min.map -o dist/sofia-tree-min.js && rm sofia-tree-min.map"
   },
   "analyze": true
 }

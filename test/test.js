@@ -4,7 +4,7 @@ var SofiaTree = require('../');
 module.exports = {
 
 	setUp: function (callback) {
-		this.dictionary=["b","bar","barbar","f","foo","foobar"];
+		this.dictionary=["b","bar","barbar","f","foo","foobar","ju","jump","junction","jungle","junk","just"];
 		this.sofiaTree= new SofiaTree({useCache: true});
 
         this.dictionary.forEach(function(word){
@@ -19,17 +19,13 @@ module.exports = {
         test.deepEqual(this.sofiaTree.getCompletions("foo"),["foo","foobar"]);
         test.done();
     },
+
     "Retrieve all the completions but the prefix itself when excluding": function(test) {
 
         test.deepEqual(this.sofiaTree.getCompletions("foo",true),["foobar"]);
         test.done();
     },
-    "Retrieve all the completions starting by foo using recursive implementation": function(test) {
-
-        test.deepEqual(this.sofiaTree.getCompletions("foo",false,true),["foo","foobar"]);
-        test.done();
-    },
-
+    
     "Prints the whole dictionary when asking for empty string": function(test) {
 
     	test.deepEqual(_.sortBy(this.sofiaTree.getCompletions()),this.dictionary);
@@ -46,6 +42,14 @@ module.exports = {
     	this.sofiaTree.insert("SOFIA");
     	test.deepEqual(_.sortBy(this.sofiaTree.getCompletions("Sofia")),["sofia"]);
     	test.deepEqual(this.sofiaTree.getCompletions("foo"),["foo","foobar"]);
+        test.done();
+    },
+
+    "Limiting results number": function(test) {
+
+        test.deepEqual(_.sortBy(this.sofiaTree.getCompletions("ju",false,3)),["ju","junk","just"]);
+        test.deepEqual(_.sortBy(this.sofiaTree.getCompletions("ju",3)),["ju","junk","just"]);
+        test.deepEqual(_.sortBy(this.sofiaTree.getCompletions("ju",true,3)),["jungle","junk","just"]);
         test.done();
     },
 
@@ -81,5 +85,6 @@ module.exports = {
         test.done();
     },
 
-    
+
+
 };
