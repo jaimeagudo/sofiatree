@@ -19,6 +19,7 @@ module.exports = {
         test.deepEqual(this.sofiaTree.getCompletions("foo"),["foo","foobar"]);
         test.done();
     },
+
     "Retrieve all the completions but the prefix itself when excluding": function(test) {
 
         test.deepEqual(this.sofiaTree.getCompletions("foo",true),["foobar"]);
@@ -47,6 +48,7 @@ module.exports = {
     "Limiting results number": function(test) {
 
         test.deepEqual(_.sortBy(this.sofiaTree.getCompletions("ju",false,3)),["ju","junk","just"]);
+        test.deepEqual(_.sortBy(this.sofiaTree.getCompletions("ju",3)),["ju","junk","just"]);
         test.deepEqual(_.sortBy(this.sofiaTree.getCompletions("ju",true,3)),["jungle","junk","just"]);
         test.done();
     },
