@@ -77,12 +77,20 @@ server.post('/dictionary/',jsonParser, function (req, res) {
 
 
 
-server.get('/search/:term',function (req, res) {
+server.get('/search/:term/:limit?',function (req, res) {
 
 	console.log("Searching for '"+ req.params.term + "' ...");
 	// Comment this to compare perfomance betwen SofiaTree and linealSearch 
+
 	
 	linealSearch(req.params.term.toLowerCase(),dictionary); 
+
+	if(req.params.limit){
+		var t = process.hrtime();
+		var result=sofiaTree.getCompletions(req.params.term, parseInt(req.params.limit));
+		t = process.hrtime(t);
+		console.log("  %d results found on %d s and %d ms using SofiaTree (limited)", result.length, t[0], t[1] / 1e6);
+	}
 
 	var t = process.hrtime();
 	var result=sofiaTree.getCompletions(req.params.term);
