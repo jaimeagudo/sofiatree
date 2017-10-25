@@ -38,14 +38,14 @@ var sofiaTree= new SofiaTree({
 
 dictionary.forEach(function(word){
 	sofiaTree.insert(word);
-},server);
+});
 	
 //Retrieve all the completions including the prefix
 console.log(sofiaTree.getCompletions("foo"));
 
 ["foo","foobar"]
 
-//Retrieve all the completions without the prefix
+//Retrieve all the completions without the prefix itself
 console.log(sofiaTree.getCompletions("foo",true));
 
 ["foobar"]
